@@ -1,0 +1,78 @@
+.tutor-order-card {
+  margin-bottom: 12px;
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+
+    .code-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .order-code {
+        font-weight: 500;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .copy-btn {
+        padding: 2px;
+        height: auto;
+        
+        &:hover {
+          background-color: #f5f7fa;
+        }
+      }
+    }
+
+    .tags-container {
+      display: flex;
+      gap: 6px;
+      
+      :deep(.el-tag) {
+        padding: 0 8px;
+        height: 22px;
+        line-height: 22px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .order-content {
+    .info-item {
+      margin-bottom: 6px;
+      line-height: 1.4;
+      font-size: 13px;
+      display: flex;
+      
+      &:last-child {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px dashed #dcdfe6;
+      }
+      
+      .label {
+        color: #666;
+        margin-right: 0;
+        width: 60px;
+        flex-shrink: 0;
+        text-align: justify;
+        text-align-last: justify;
+      }
+
+      .colon {
+        margin-right: 6px;
+        margin-left: 3px;
+        color: #666;
+      }
+    }
+  }
+
+  :deep(.el-card__body) {
+    padding: 15px;
+  }
+}

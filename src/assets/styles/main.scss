@@ -1,0 +1,53 @@
+@use '@/assets/styles/variables' as *;
+
+// 全局样式重置
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// 字体声明
+@font-face {
+    font-family: 'DM Sans';
+    src: url('@/assets/fonts/DMSans.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('@/assets/fonts/Montserrat.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans SC';
+    src: url('@/assets/fonts/NotoSansSC-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('@/assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+// 更新全局字体设置
+html,
+body {
+    height: 100%;
+    font-family: 'DM Sans', 'Montserrat', 'Noto Sans SC', -apple-system,
+        sans-serif;
+}
+
+#app {
+    height: 100%;
+}
