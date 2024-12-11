@@ -6,6 +6,8 @@
       </el-header>
 
       <el-main>
+        <!-- 通知消息 -->
+        <tutors-notice />
         <!-- 筛选标签 -->
         <tutors-filter-tags />
         <!-- 列表 -->
@@ -19,13 +21,15 @@ import { defineComponent } from 'vue'
 import TutorsList from '@/components/tutors/TutorsList.vue'
 import TutorsToolbar from '@/components/tutors/tutorsToolbar'
 import TutorsFilterTags from '@/components/tutors/TutorsFilterTags.vue'
+import TutorsNotice from '@/components/tutors/TutorsNotice/TutorsNotice.vue'
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     TutorsList,
     TutorsToolbar,
-    TutorsFilterTags
+    TutorsFilterTags,
+    TutorsNotice
   }
 })
 </script>
