@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosHeaders } from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { getErrorMessage } from './errorCode'
@@ -34,6 +34,12 @@ axiosInstance.interceptors.request.use(
     console.log('method:', config.method)
     console.log('params:', config.params)
     console.log('data:', config.data)
+
+    // 添加 x-city header
+    if (!config.headers) {
+      config.headers = new AxiosHeaders()
+    }
+    config.headers.set('x-city', 'tj')
 
     return config
   },
