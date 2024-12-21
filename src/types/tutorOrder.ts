@@ -8,6 +8,7 @@ export interface TutorOrder {
   teaching_type?: string | null  // 教学类型
   student_grade: string  // 学生年级
   subjects: string     // 科目
+  subjects_desc?: string | null  // 科目描述
   teacher_type?: string | null  // 教师类型
   teacher_gender?: string | null  // 教师性别
   order_tags?: string | null  // 订单标签

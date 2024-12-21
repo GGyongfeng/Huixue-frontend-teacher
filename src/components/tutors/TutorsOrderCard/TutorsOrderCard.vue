@@ -33,7 +33,7 @@
       <div class="info-item">
         <span class="label">科目</span>
         <span class="colon">:</span>
-        <span>{{ order.subjects }}</span>
+        <span>{{ order.subjects_desc }}</span>
       </div>
 
 
@@ -143,37 +143,45 @@ const orderTags = computed(() => {
 
 // 复制功能
 const handleCopy = () => {
-  // 创建临时 input 元素并设置样式
-  const tempInput = document.createElement('input')
-  tempInput.value = props.order.tutor_code
-  tempInput.style.position = 'fixed'
-  tempInput.style.opacity = '0'
-  tempInput.style.top = '0'
-  tempInput.style.left = '0'
-  document.body.appendChild(tempInput)
+  const orderText = `${props.order.tutor_code}号家教
+【学生性别】：${props.order.student_gender || '未指定'}
+【学生年级】：${props.order.student_grade}
+【补习科目】：${props.order.subjects_desc}
+【补习时间】：${props.order.tutoring_time}
+【报价】：${props.order.salary}
+【地址】：${props.order.district}${props.order.address}
+【对老师要求】：${props.order.requirement_desc}`
+
+  // 使用 textarea 代替 input
+  const tempTextArea = document.createElement('textarea')
+  tempTextArea.value = orderText
+  tempTextArea.style.position = 'fixed'
+  tempTextArea.style.opacity = '0'
+  tempTextArea.style.top = '0'
+  tempTextArea.style.left = '0'
+  document.body.appendChild(tempTextArea)
 
   try {
-    // 选中文本
-    tempInput.focus()
-    tempInput.select()
+    tempTextArea.focus()
+    tempTextArea.select()
 
     // 对于iOS设备特殊处理
     if (navigator.userAgent.match(/ipad|iphone/i)) {
       const range = document.createRange()
-      range.selectNodeContents(tempInput)
+      range.selectNodeContents(tempTextArea)
       const selection = window.getSelection()
       if (selection) {
         selection.removeAllRanges()
         selection.addRange(range)
       }
-      tempInput.setSelectionRange(0, 999999)
+      tempTextArea.setSelectionRange(0, 999999)
     }
 
     // 执行复制
     const successful = document.execCommand('copy')
     if (successful) {
       ElMessage({
-        message: '订单编号已复制',
+        message: '订单信息已复制',
         type: 'success',
         duration: 2000
       })
@@ -181,11 +189,10 @@ const handleCopy = () => {
       throw new Error('复制失败')
     }
   } catch (err) {
-    // 如果execCommand失败，尝试使用clipboard API
-    navigator.clipboard?.writeText(props.order.tutor_code)
+    navigator.clipboard?.writeText(orderText)
       .then(() => {
         ElMessage({
-          message: '订单编号已复制',
+          message: '订单信息已复制',
           type: 'success',
           duration: 2000
         })
@@ -198,8 +205,7 @@ const handleCopy = () => {
         })
       })
   } finally {
-    // 清理临时元素
-    document.body.removeChild(tempInput)
+    document.body.removeChild(tempTextArea)
   }
 }
 

@@ -54,19 +54,17 @@ export const useTutorStore = defineStore('tutor', {
         
         const response = await getTutorsList(params)
 
-        // response 已经是经过拦截器处理的数据
-        const { list, total, page, pageSize } = response
+        // 修改这里的数据处理逻辑
+        const { list, total } = response
         console.log('解析数据:', {
           列表长度: list.length,
           总数: total,
-          页码: page,
-          每页条数: pageSize
+          当前页码: this.page, 
+          每页条数: this.pageSize 
         })
         
         this.tutorsList = list
         this.total = total
-        this.page = page
-        this.pageSize = pageSize
 
       } catch (err) {
         console.error('捕获错误:', err)

@@ -25,7 +25,7 @@
         <el-button type="text" @click="toggleSidebar">
           <el-icon><Fold v-if="!isCollapse" /><Expand v-else /></el-icon>
         </el-button>
-        <span>汇学家教</span>
+        <span>{{ title }}</span>
       </el-header>
 
       <!-- 主要内容区域 -->
@@ -50,6 +50,7 @@ export default defineComponent({
   },
   setup() {
     const isCollapse = ref(false)
+    const title = import.meta.env.VITE_APP_TITLE
 
     const toggleSidebar = () => {
       isCollapse.value = !isCollapse.value
@@ -57,7 +58,8 @@ export default defineComponent({
 
     return {
       isCollapse,
-      toggleSidebar
+      toggleSidebar,
+      title
     }
   }
 })

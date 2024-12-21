@@ -6,8 +6,8 @@ import { getErrorMessage } from './errorCode'
 // 创建请求实例
 const axiosInstance: AxiosInstance = axios.create({
   timeout: 15000, // 请求超时时间(毫秒)
-  baseURL: import.meta.env.VITE_APP_BASE_API, // API地址
-  withCredentials: true, // 异步请求携带cookie
+  baseURL: import.meta.env.VITE_BASE_API_URL, // 直接使用 API 服务器地址
+  withCredentials: false, // 异步请求携带cookie:false
   transformRequest: [(data) => JSON.stringify(data)], // 请求数据转换为 JSON 字符串
   validateStatus: (status) => status >= 200 && status < 300, // 只接受 2xx 的状态码
   headers: {
@@ -39,7 +39,10 @@ axiosInstance.interceptors.request.use(
     if (!config.headers) {
       config.headers = new AxiosHeaders()
     }
-    config.headers.set('x-city', 'tj')
+    
+    // 从环境变量获取城市代码，默认为 tj
+    const city = import.meta.env.VITE_CITY
+    config.headers.set('x-city', city)
 
     return config
   },
