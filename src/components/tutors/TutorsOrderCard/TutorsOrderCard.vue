@@ -2,17 +2,23 @@
   <el-card class="tutor-order-card">
     <div class="order-header">
       <div class="code-wrapper">
-        <span class="order-code">订单编号：{{ order.tutor_code }}</span>
-        <el-button class="copy-btn" type="primary" link :icon="CopyDocument" @click="handleCopy" />
+        <div class="left-section">
+          <span class="order-code">订单编号：{{ order.tutor_code }}</span>
+        </div>
+        <div class="right-section" @click="handleCopy">
+          {{ order.created_by_name }}
+          <el-button class="copy-btn" type="primary" link :icon="CopyDocument" />
+        </div>
       </div>
-      <div class="tags-container">
-        <!-- 订单标签，如果存在则显示，可能有多个标签 -->
+
+      <!-- 订单标签，如果存在则显示，可能有多个标签 -->
+      <!-- <div class="tags-container">
         <template v-if="order.order_tags">
           <el-tag v-for="tag in orderTags" :key="tag" type="warning" class="mr-2">
             {{ tag }}
           </el-tag>
         </template>
-      </div>
+      </div> -->
     </div>
 
     <div class="order-content">
@@ -25,33 +31,24 @@
       </template>
 
       <div class="info-item">
-        <span class="label">年级</span>
+        <span class="label">学生年级</span>
         <span class="colon">:</span>
         <span>{{ order.student_grade }}</span>
       </div>
 
       <div class="info-item">
-        <span class="label">科目</span>
+        <span class="label">补习科目</span>
         <span class="colon">:</span>
         <span>{{ order.subjects_desc }}</span>
       </div>
 
-
-      <!-- <template v-if="hasStudentCondition">
+      <template v-if="order.grade_score">
         <div class="info-item">
-          <span class="label">学生情况</span>
+          <span class="label">现阶段成绩</span>
           <span class="colon">:</span>
-          <span>{{ studentCondition }}</span>
+          <span>{{ order.grade_score }}</span>
         </div>
-      </template> -->
-
-      <div class="info-item">
-        <span class="label">地址</span>
-        <span class="colon">:</span>
-        <span class="address" @click="handleCopyAddress">
-          {{ order.city }}{{ order.district }}{{ order.address }}
-        </span>
-      </div>
+      </template>
 
       <div class="info-item">
         <span class="label">教学时间</span>
@@ -64,26 +61,36 @@
         <span class="colon">:</span>
         <span>{{ order.salary }}</span>
       </div>
-      <!--   
-        <template v-if="hasTeacherRequirements">
-          <div class="info-item">
-            <span class="label">教师要求</span>
-            <span class="colon">:</span>
-            <span>{{ teacherRequirements }}</span>
-          </div>
-        </template> -->
 
       <div class="info-item">
-        <span class="label">其他说明</span>
+        <span class="label">地址</span>
+        <span class="colon">:</span>
+        <span class="address" @click="handleCopyAddress">
+          {{ order.city }}{{ order.district }}{{ order.address }}
+        </span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">对老师要求</span>
         <span class="colon">:</span>
         <span>{{ order.requirement_desc }}</span>
       </div>
+
+      <!-- <div class="info-item">
+        <span class="label">创建人</span>
+        <span class="colon">:</span>
+        <span>{{ order.created_by_name }}</span>
+      </div> -->
+
+      <!-- <div class="info-item right-section" @click="handleCopy">
+        {{ order.created_by_name }}
+        <el-button class="copy-btn" type="primary" link :icon="CopyDocument" />
+      </div> -->
     </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { CopyDocument } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import type { TutorOrder } from '@/types/tutorOrder'
@@ -92,54 +99,14 @@ const props = defineProps<{
   order: TutorOrder
 }>()
 
-// 将order_tags字符串转换为数组
-const orderTags = computed(() => {
-  if (!props.order.order_tags) return []
-  return props.order.order_tags.split(',').map(tag => tag.trim())
-})
-
-// // 计算学生情况
-// const studentCondition = computed(() => {
-//   const condition = []
-//   if (props.order.grade_score) {
-//     condition.push(`成绩 ${props.order.grade_score}`)
-//   }
-//   if (props.order.student_level) {
-//     condition.push(`${props.order.student_level}`)
-//   }
-//   return condition.join('，')
+// ----这部分是关于标签的渲染的---
+// import { computed } from 'vue'
+// // 将order_tags字符串转换为数组
+// const orderTags = computed(() => {
+//   if (!props.order.order_tags) return []
+//   return props.order.order_tags.split(',').map(tag => tag.trim())
 // })
-
-
-// // 计算教师要求
-// const teacherRequirements = computed(() => {
-//   const requirements = []
-//   if (props.order.teaching_type) {
-//     requirements.push(`${props.order.teaching_type}`)
-//   }
-//   if (props.order.teacher_type) {
-//     requirements.push(`${props.order.teacher_type}`)
-//   }
-//   if (props.order.teacher_gender) {
-//     requirements.push(`${props.order.teacher_gender}`)
-//   }
-//   return requirements.join('，')
-// })
-
-// // 是否有教师要求
-// const hasTeacherRequirements = computed(() => {
-//   return !!(
-//     props.order.teaching_type || 
-//     props.order.teacher_type || 
-//     (props.order.teacher_gender && props.order.teacher_gender !== 'null')
-//   )
-// })
-
-
-// // 是否有学生情况
-// const hasStudentCondition = computed(() => {
-//   return !!(props.order.grade_score || props.order.student_level)
-// })
+// ============================
 
 // 复制功能
 const handleCopy = () => {
@@ -272,13 +239,4 @@ const handleCopyAddress = () => {
 
 <style lang="scss" scoped>
 @use './style.scss';
-
-.address {
-  cursor: pointer;
-  color: #409eff;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
 </style>

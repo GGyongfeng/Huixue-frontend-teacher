@@ -1,5 +1,5 @@
 .tutor-order-card {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 
   .order-header {
     display: flex;
@@ -10,8 +10,45 @@
 
     .code-wrapper {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      width: 100%;
+      
+      .left-section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .right-section {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+
+        &::before {
+          content: '复制本单，联系';
+          color: #999;
+          font-size: 12px;
+          font-weight: 400;
+        }
+
+        color: #f56c6c;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+          color: #409eff;
+          
+          &::before {
+            color: #409eff;
+          }
+          
+          .copy-btn {
+            color: #409eff;
+          }
+        }
+      }
 
       .order-code {
         font-weight: 500;
@@ -49,16 +86,17 @@
       font-size: 13px;
       display: flex;
       
-      &:last-child {
-        margin-top: 8px;
-        padding-top: 8px;
-        border-top: 1px dashed #dcdfe6;
-      }
+      // 最后一个元素的样式前面添加虚线
+      // &:last-child {
+      //   margin-top: 8px;
+      //   padding-top: 8px;
+      //   border-top: 1px dashed #dcdfe6;
+      // }
       
       .label {
         color: #666;
         margin-right: 0;
-        width: 60px;
+        width: 70px;
         flex-shrink: 0;
         text-align: justify;
         text-align-last: justify;
@@ -68,6 +106,47 @@
         margin-right: 6px;
         margin-left: 3px;
         color: #666;
+      }
+
+      // 复制区域的样式
+      &.right-section {
+        cursor: pointer;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 0px;
+        gap: 4px;
+
+        &::before {
+          content: '复制本单，联系';
+          color: #999;
+          font-size: 12px;
+          font-weight: 400;
+        }
+
+        color: #f56c6c;
+        font-size: 14px;
+        font-weight: 600;
+
+        &:hover {
+          color: #409eff;
+          
+          &::before {
+            color: #409eff;
+          }
+          
+          .copy-btn {
+            color: #409eff;
+          }
+        }
+      }
+    }
+
+    .address {
+      cursor: pointer;
+      color: #409eff;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

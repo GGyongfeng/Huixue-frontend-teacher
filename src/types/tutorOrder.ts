@@ -15,9 +15,12 @@ export interface TutorOrder {
   district: string     // 区
   city: string         // 市
   address: string      // 地址
-  grade_score?: string | null  // 学生成绩
+  grade_score?: string | null  // 现阶段成绩
   student_level?: string | null  // 学生水平
   tutoring_time: string  // 教学时间
   salary: string  // 课时费用
   requirement_desc: string  // 具体要求
+  original_text: string  // 原始文本
+  created_by_name: string  // 创建人
+  updated_by_name: string  // 更新人
 }
