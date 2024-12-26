@@ -1,8 +1,11 @@
+// 从环境变量获取区域列表并处理成数组
+const DISTRICTS = import.meta.env.VITE_DISTRICT?.split(',') || []
+
 // 订单相关的常量配置
 export const TUTOR_CONSTANTS = {
   STUDENT_GRADES: ['幼儿', '小学', '初一', '初二', '初三', '高一', '高二', '高三', '成人', '其他'],
   TEACHING_TYPES: ['一对一', '一对多'],
-  DISTRICTS: ['和平区', '南开区', '河东区', '河西区', '河北区', '红桥区', '东丽区', '西青区', '津南区', '北辰区', '武清区', '宝坻区', '滨海新区', '宁河区', '静海区', '蓟州区'],
+  DISTRICTS,
   TEACHER_TYPES: ['在职老师', '985学生', '无'],
   STUDENT_LEVELS: ['优秀', '较好', '中等', '不及格'],
   SUBJECTS: ['语文', '数学', '英语', '物理', '化学', '生物', '历史', '地理', '政治', '国际课程', '其他']
@@ -37,10 +40,6 @@ export const TUTOR_FILTERS: TutorFilters = {
   student: {
     label: '学生情况',
     children: {
-      student_gender: {
-        label: '性别',
-        options: ['男', '女']
-      },
       student_grade: {
         label: '年级',
         options: [...TUTOR_CONSTANTS.STUDENT_GRADES]

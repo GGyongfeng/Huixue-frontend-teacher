@@ -2,7 +2,7 @@
   <el-container class="home-page">
       <el-header class="header">
         <!-- 工具栏 -->
-        <tutors-toolbar />
+        <tutors-toolbar2 />
       </el-header>
 
       <el-main>
@@ -19,7 +19,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import TutorsList from '@/components/tutors/TutorsList.vue'
-import TutorsToolbar from '@/components/tutors/tutorsToolbar'
+import { TutorsToolbar2 } from '@/components/tutors/tutorsToolbar'
 import TutorsFilterTags from '@/components/tutors/TutorsFilterTags.vue'
 import TutorsNotice from '@/components/tutors/TutorsNotice/TutorsNotice.vue'
 
@@ -27,7 +27,7 @@ export default defineComponent({
   name: 'HomePage',
   components: {
     TutorsList,
-    TutorsToolbar,
+    TutorsToolbar2,
     TutorsFilterTags,
     TutorsNotice
   }
@@ -43,9 +43,9 @@ export default defineComponent({
   overflow: hidden;
 
   .header {
-    height: 64px;
+    height: 100%;
     line-height: 64px;
-    padding: 0 20px;
+    padding:20px;
     background-color: #fff;
     display: flex;
     align-items: center;
